@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include <raymath.h>
 #include "fontLoader.hpp"
+#include "textSnippet.hpp"
 #include <string>
 #include <iostream>
 
@@ -41,6 +42,8 @@ void App::initApp()
         30
     );
     Font myFont = fontLoader.getFont("RobotoCondensed-Bold.ttf");
+    TextSnippet ts1("", myFont);
+    TextSnippet gridIdxSnippet("", myFont);
 
     /** Configure mesh */
     msh1
@@ -59,7 +62,10 @@ void App::initApp()
             Vector2 gridMousePosVec = msh1->getGridMousePosVec();
             int incr = msh1->getIncrement();
             std::string str = std::to_string((int)(gridMousePosVec.x/incr)) + ", " + std::to_string((int)(gridMousePosVec.y/incr));
-            DrawTextEx(myFont, str.c_str(), (Vector2){ 20, 20 }, 30, 0, BLACK);
+            gridIdxSnippet.setPosition((Vector2){ 20, 20 });
+            gridIdxSnippet.setText(str);
+            gridIdxSnippet.drawSnippet();
+
             msh1->drawHoverRect(GREEN);
             /****************** Mesh ***********************/
             msh1->draw();
@@ -67,6 +73,10 @@ void App::initApp()
 
             /** Mouse position vector */
             Vector2 mousePosVec = GetMousePosition();
+            std::string pStr = std::to_string((int)mousePosVec.x) + ", " + std::to_string((int)mousePosVec.y);
+            ts1.setText(pStr);
+            ts1.setPosition(Vector2Add(mousePosVec, (Vector2){ 10, 5}));
+            ts1.drawSnippet();
 
             if(IsKeyPressed(KEY_UP)) {
                 msh1->resizeBy(2);

@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    App* appInstance = App::getAppInstance(800, 450, "My application");
+    App* appInstance = App::getAppInstance(1280, 720, "My application");
     appInstance->initApp();
     return 0;
 }

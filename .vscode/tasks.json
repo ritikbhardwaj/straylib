@@ -1,0 +1,41 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build:C++17",
+			"command": "/usr/bin/clang++",
+			"args": [
+				"-fcolor-diagnostics",
+				"-fansi-escape-codes",
+				"-g",
+				"${workspaceFolder}/src/main.cpp",
+				"-o",
+				"${workspaceFolder}/build/main",
+				"--std=c++17"
+			],
+			"options": {
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/clang++"
+		},
+		{
+			"type": "process",
+			"label": "Run:C++17",
+			"command": "${workspaceFolder}/build/main",
+			"problemMatcher": []
+		},
+		{
+			"label": "Run",
+			"dependsOn": [
+				"Build:C++17",
+				"Run:C++17"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		}
+	]
+}
